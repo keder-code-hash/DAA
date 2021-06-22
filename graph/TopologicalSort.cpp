@@ -12,7 +12,7 @@ int DFS_VISIT(int **Graph,bool *visited,int vertexNo,int *order,int vertex,int i
 			index=DFS_VISIT(Graph,visited,vertexNo,order,k,index);
 		}
 	}
-	order[index]=vertex;
+	order[vertexNo-1-index]=vertex;
 	return (index-1);
 }
 void DFS(int **Graph,bool *visited,int vertexNo,int *order)
@@ -23,7 +23,6 @@ void DFS(int **Graph,bool *visited,int vertexNo,int *order)
 		visited[i]=false;
 	}
 	for(i=0;i<vertexNo;i++){
-//		printf("%d ",order[vertexNo-1-i]);
 		if(visited[i]==false)
 		{
 			index=DFS_VISIT(Graph,visited,vertexNo,order,i,index);
@@ -53,3 +52,21 @@ int main()
 		printf(" %d ",order[i]);
 	}
 }
+/*
+
+	0 1 0 1 0 0
+	0 0 1 1 0 0
+	0 0 0 1 1 1
+	0 0 0 0 1 1
+	0 0 0 0 0 1
+	0 0 0 0 0 0
+	
+	
+	0 0 1 0 0 0 0
+	0 0 1 1 0 0 0
+	0 0 0 0 1 0 0
+	0 0 0 0 0 1 0
+	0 0 0 0 0 1 0
+	0 0 0 0 0 0 1
+	0 0 0 0 0 0 0
+*/
