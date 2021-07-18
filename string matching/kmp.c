@@ -44,8 +44,10 @@ void KMPMatcher(char *pat,char *text,int *prefArr,int patLength,int textLength)
 		if(q==patLength)
 		{
 			printf("shift to be done at: %d\n",i-patLength+1);
+			return;
 		}
 	}
+	printf("Pattern Not Found");
 }
 int main(void)
 {
