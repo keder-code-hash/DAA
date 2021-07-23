@@ -1,0 +1,73 @@
+/*
+# 15 Puzzle Problem	--Pseudo
+
+bool isValidMove(i, j, size):
+	return i, j >= 0 and <= size
+
+int LESS(i, j, matrix, size):
+	less = 0
+	for k=i to size:
+		for l=j to size:
+			if mat[i,j] > mat[k,l]:
+				less++
+	return less
+
+int willBranch(row, col, size, matrix):
+	if (row % 2 != 0 and col % 2 == 0):
+		X = 1
+	else:
+		X = 0
+
+	sumLess = cost = 0
+	for i=0 to size:
+		for j=0 to size:
+			if [i,j] != [row,col]:
+				temp = LESS[i,j]
+				if temp:
+					cost++
+					sumLess += temp
+
+	if (sumLess - X) % 2 == 0:
+		return cost
+
+
+void recursiveFunc(i, j, size, matrix, moves=[T, T, T, T]):
+	if (cost == 0 and empty_slot == matrix[size][size]):
+		return
+
+	for i in range(len(moves)):
+		if moves[i]:
+			switch (i):
+				case 0:
+					// up
+				case 1:
+					// down
+				case 2:
+					// left
+				case 3:
+					// right
+				default:
+					break;
+
+int LESS(int **puzzle,int size,int x,int i,int j)
+{
+    int less=0,k=0,l=0;
+    if(j==size && i<size)
+    {
+        k=i+1;
+    }
+    for(k=0;k<size;k++)
+    {
+        for(l=0;l<size;l++)
+        {
+            if((k>=i && l>=j) && puzzle[k][l]!=0  && puzzle[i][j]>puzzle[k][l] )
+            {
+                printf("%d ",puzzle[k][l]);
+                less++;
+            }
+        }
+    }
+    return less;
+}
+moves=u,d,l,r;
+*/
