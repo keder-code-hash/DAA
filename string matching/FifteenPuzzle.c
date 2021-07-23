@@ -24,7 +24,8 @@ int swap(int *a,int *b)
 }
 int LESS(int a,int b,int **puzzle,int size)
 {
-    int i=0,j=0,less=0,flag=0;
+	printf("START-->%d ",puzzle[a][b]);
+    int i=0,j=0,less=0,flag=b;
     for(i=a;i<size;i++)
     {
         for(j=flag;j<size;j++)
@@ -32,6 +33,7 @@ int LESS(int a,int b,int **puzzle,int size)
             if(puzzle[i][j]!=0 && puzzle[a][b]>puzzle[i][j])
             {
                 less++;
+                printf("%d   ",puzzle[i][j]);
             }
         }
         if(flag)
@@ -39,6 +41,7 @@ int LESS(int a,int b,int **puzzle,int size)
             flag=0;
         }
     }
+    printf("\n");
     return less;
 }
 int branchValid(int row,int col,int **puzzle,int size)
