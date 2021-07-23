@@ -101,9 +101,16 @@ int main()
     LcsStringMatching(first,second,len1+1,len2+1,cost,trace);
     // printDp(len1+1,len2+1,cost);
     // printTrace(len1+1,len2+1,trace);
-    printf("MatchedString is:-\n");
-    printMatch(len1,len2,trace,first,&length);
-    printf("\nLength of Matched String is: %d",length);
+    if(length>0)
+    {
+        printf("MatchedString is:-\n");
+        printMatch(len1,len2,trace,first,&length);
+        printf("\nLength of Matched String is: %d",length);
+    }
+    else
+    {
+        printf("NO MATCH!");
+    }
 }
 
 
