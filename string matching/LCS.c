@@ -52,7 +52,7 @@ void LcsStringMatching(char *first,char *second,int length1,int length2,int **co
         }
     }
 }
-void printMatch(int xPos,int yPos,char **trace,char *str1,int *length)
+void printMatch(int xPos,int yPos,char **trace,char *str1,int *length,char *result)
 {
     if(xPos==0 && yPos==0)
     {
@@ -60,18 +60,20 @@ void printMatch(int xPos,int yPos,char **trace,char *str1,int *length)
     }
     if(trace[xPos][yPos]=='c')
     {
-        printMatch(xPos-1,yPos-1,trace,str1,length);
+        printMatch(xPos-1,yPos-1,trace,str1,length,result);
         // printf("index-->%d\n",xPos);
+        result[(*length)]=str1[xPos-1];
         (*length)++;
-        printf("%c",str1[xPos-1]);
+        // ;
+        // printf("%c",);
     }
     else if(trace[xPos][yPos]=='u')
     {
-        printMatch(xPos-1,yPos,trace,str1,length);
+        printMatch(xPos-1,yPos,trace,str1,length,result);
     }
     else if(trace[xPos][yPos]=='s')
     {
-        printMatch(xPos,yPos-1,trace,str1,length);
+        printMatch(xPos,yPos-1,trace,str1,length,result);
     }
     else{
         return;
@@ -79,11 +81,12 @@ void printMatch(int xPos,int yPos,char **trace,char *str1,int *length)
 }
 int main()
 {
-    int len1,len2,i=0,length=0;
+    int len1,len2,i=0,length=0,ind=0;
     scanf("%d",&len1);
     scanf("%d",&len2);
     char *first=(char *)malloc(len1 * sizeof(char));
     char *second=(char *)malloc(len2 * sizeof(char));
+    char *result=(char *)malloc(len1 * sizeof(char));
     fflush(stdin);
     fgets(first,len1+1,stdin);
 	fflush(stdin);
@@ -101,10 +104,16 @@ int main()
     LcsStringMatching(first,second,len1+1,len2+1,cost,trace);
     // printDp(len1+1,len2+1,cost);
     // printTrace(len1+1,len2+1,trace);
+    printMatch(len1,len2,trace,first,&length,result);
+    result[length]='\0';
     if(length>0)
     {
         printf("MatchedString is:-\n");
-        printMatch(len1,len2,trace,first,&length);
+        while (result[ind]!='\0')
+        {
+            printf("%c",result[ind]);
+            ind++;
+        }
         printf("\nLength of Matched String is: %d",length);
     }
     else
@@ -129,4 +138,9 @@ AEDFHR
 7
 AGGTAB
 GXTXAYB
+
+4
+3
+xyzv
+abc
 */

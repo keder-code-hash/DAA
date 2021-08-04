@@ -24,7 +24,7 @@ int swap(int *a,int *b)
 }
 int LESS(int a,int b,int **puzzle,int size)
 {
-	printf("START-->%d ",puzzle[a][b]);
+	// printf("START-->%d ",puzzle[a][b]);
     int i=0,j=0,less=0,flag=b;
     for(i=a;i<size;i++)
     {
@@ -33,7 +33,7 @@ int LESS(int a,int b,int **puzzle,int size)
             if(puzzle[i][j]!=0 && puzzle[a][b]>puzzle[i][j])
             {
                 less++;
-                printf("%d   ",puzzle[i][j]);
+                // printf("%d   ",puzzle[i][j]);
             }
         }
         if(flag)
@@ -41,7 +41,7 @@ int LESS(int a,int b,int **puzzle,int size)
             flag=0;
         }
     }
-    printf("\n");
+    // printf("\n");
     return less;
 }
 int branchValid(int row,int col,int **puzzle,int size)
@@ -69,7 +69,7 @@ int branchValid(int row,int col,int **puzzle,int size)
     
 
     // printf("LESS value-->%d",totLess);
-    if((totLess+x)%2==0)
+    if((totLess+row+1)%2==0)
     {
         return 0;
     }
@@ -77,7 +77,10 @@ int branchValid(int row,int col,int **puzzle,int size)
 }
 bool isValid(int i,int j,int size)
 {
-    if(i>=0 && j>=0 && i<size && j<size) return true;
+    if(i>=0 && j>=0 && i<size && j<size) 
+        return true;
+    else
+        return false;
 }
 int cost(int **puzzle,int size)
 {
@@ -92,6 +95,7 @@ int cost(int **puzzle,int size)
             }
         }
     }
+    printf("cost-->%d",c);
     return c;
 }
 
@@ -108,6 +112,7 @@ void FifteenPuzzle(int **puzzle,int size,int i,int j,int *moves)
     int minCost=INT_MAX,tempCost=0;
     if(cost(puzzle,size)==0) 
     {
+        printf("hiii");
         return;
     }
 
@@ -116,7 +121,7 @@ void FifteenPuzzle(int **puzzle,int size,int i,int j,int *moves)
     if(moves[0]==1)
     {
         //up
-        if(isValid(i-1,j,size))
+        if(isValid(i-1,j,size) )
         {
             //up position is valid.
             swap(&puzzle[i][j],&puzzle[i-1][j]);
@@ -177,7 +182,7 @@ void FifteenPuzzle(int **puzzle,int size,int i,int j,int *moves)
     if(moves[3]==1)
     {
         //right
-        if(isValid(i,j+1,size))
+        if(isValid(i,j+1,size) )
         {
             swap(&puzzle[i][j],&puzzle[i][j+1]);
             tempCost=cost(puzzle,size);
@@ -205,27 +210,27 @@ void FifteenPuzzle(int **puzzle,int size,int i,int j,int *moves)
     {
         //up
         swap(&puzzle[i][j],&puzzle[i-1][j]);
-        moves[0]=0;
+        moves[1]=0;
         FifteenPuzzle(puzzle,size,i-1,j,moves);
     }
     else if(branchIndex==1)
     {
         //down
-        moves[1]=0;
+        moves[0]=0;
         swap(&puzzle[i][j],&puzzle[i+1][j]);
         FifteenPuzzle(puzzle,size,i+1,j,moves);
     }
     else if(branchIndex==2)
     {
         //left
-        moves[2]=0;
+        moves[3]=0;
         swap(&puzzle[i][j],&puzzle[i][j-1]);
         FifteenPuzzle(puzzle,size,i,j-1,moves);
     }
     else if(branchIndex==3)
     {
         //right
-        moves[3]=0;
+        moves[2]=0;
         swap(&puzzle[i][j],&puzzle[i][j+1]);
         FifteenPuzzle(puzzle,size,i,j+1,moves);
     }
@@ -268,14 +273,14 @@ int main()
             }
         }
     }
-    if(branchValid(spacex,spacey,puzzle,size)==1)
-    {
-        FifteenPuzzle(puzzle,size,spacex,spacey,moves);
-    }
-    else{
-        printf("INVALID BOARD!!");
-    }
     // printf("%d--->%d",spacex,spacey);
+    // if(branchValid(spacex,spacey,puzzle,size)==1)
+    // {
+        FifteenPuzzle(puzzle,size,spacex,spacey,moves);
+    // }
+    // else{
+    //     printf("INVALID BOARD!!");
+    // }
     // swap(puzzle[spacex,spacex],puzzle[2,0]);
     // printPuzzle(puzzle,size);
     // printf("%d  ",branchValid(spacex,spacey,puzzle,size));
@@ -295,4 +300,20 @@ int main()
 5 6 7 8
 9 10 11 0
 13 14 15 12
+
+6 5 4 13 
+2 0 8 15
+10 9 1 14
+12 3 11 7
+
+5 1 2 0
+13 11 7 3
+6 8 9 4
+14 10 15 12
+
+
+5 1 7 3 
+2 11 10 6
+9 14 8 12
+0 13 4 15
 */

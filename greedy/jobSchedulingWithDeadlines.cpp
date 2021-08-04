@@ -64,7 +64,7 @@ void jobSchedulingWithDeadlines(struct job_det *job,int size)
 	sequenced_job=(int *)malloc((size)*sizeof(int)); 
 	slot=(int *)malloc((size+1)*sizeof(int));
 	int k=0;
-	//1 means free,0 means booked
+	//0 means free,1 means booked
 	for(int i=0;i<size;i++){
 		slot[i]=1;
 	}
@@ -76,7 +76,7 @@ void jobSchedulingWithDeadlines(struct job_det *job,int size)
 		}
 		else{
 			int search=job[i].job_dead-1;
-			for(int j=search;j>0;j--){
+			for(int j=search;j>=0;j--){
 				if(slot[j]==1){
 					sequenced_job[j]=job[i].jod_id;
 					slot[j]=0;
@@ -100,6 +100,10 @@ int main()
 		scanf("%d%d%d",&job[i].jod_id,&job[i].profit,&job[i].job_dead); 
 	}
 	mergeSort(job,0,size-1); 
+	// for(int i=0; i<size; i++)
+	// {
+	// 	printf("%d %d %d\n",job[i].jod_id,job[i].profit,job[i].job_dead); 
+	// }
 	jobSchedulingWithDeadlines(job,size); 
 }
 

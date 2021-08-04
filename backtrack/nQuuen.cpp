@@ -44,10 +44,6 @@ void nQueen(int check,int size,int *trace)
 			if(check==size)
 			{
 				count++;
-//				for(int v=1; v<=size; v++)
-//				{
-//					printf("%d ",trace[v]); 
-//				}
 				printf("\nChessBoard:->\n");
 				printBoard(trace,size); 
 				printf("\n"); 
